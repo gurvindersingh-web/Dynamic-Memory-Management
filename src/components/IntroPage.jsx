@@ -4,10 +4,22 @@ import MagicRings from '../component/MagicRings';
 import Shuffle from '../component/Shuffle';
 import heroImg from '../assets/vite.svg';
 
+const pageVariants = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] } },
+  exit: { opacity: 0, y: -8, transition: { duration: 0.2 } },
+};
+
 export default function IntroPage({ onStart }) {
   return (
-    <div className="intro-page">
-      {/* MagicRings Background */}
+    <motion.div
+      className="intro-page"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      {/* MagicRings animated background */}
       <div className="intro-bg">
         <MagicRings
           color="#2f81f7"
@@ -34,6 +46,9 @@ export default function IntroPage({ onStart }) {
         />
       </div>
 
+      {/* Dot-grid texture overlay */}
+      <div className="dot-grid-pattern" />
+
       {/* Navbar */}
       <nav className="intro-nav">
         <div className="intro-nav-left">
@@ -52,20 +67,15 @@ export default function IntroPage({ onStart }) {
       {/* Content */}
       <div className="intro-content">
         <div className="intro-center">
-          {/* Shuffle Title */}
+          {/* Editorial Title */}
           <div className="intro-title-wrap">
             <Shuffle
               text="Dynamic Memory Management"
               tag="h1"
               className="intro-title-line"
               style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: 'clamp(1.2rem, 2.8vw, 2.2rem)',
-                fontWeight: 400,
                 color: 'var(--text)',
-                letterSpacing: '2px',
-                lineHeight: 1.4,
-                textTransform: 'uppercase',
+                lineHeight: 1.35,
               }}
               shuffleDirection="up"
               duration={0.5}
@@ -73,19 +83,16 @@ export default function IntroPage({ onStart }) {
               shuffleTimes={2}
               triggerOnce={true}
               triggerOnHover={false}
+              threshold={0}
+              rootMargin="0px"
             />
             <Shuffle
               text="Visualiser"
               tag="h1"
               className="intro-title-line intro-title-accent"
               style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: 'clamp(1.5rem, 3.5vw, 3rem)',
-                fontWeight: 400,
-                color: '#a371f7',
-                letterSpacing: '3px',
-                lineHeight: 1.4,
-                textTransform: 'uppercase',
+                color: 'var(--fifo)',
+                lineHeight: 1.35,
               }}
               shuffleDirection="up"
               duration={0.6}
@@ -93,8 +100,10 @@ export default function IntroPage({ onStart }) {
               shuffleTimes={3}
               triggerOnce={true}
               triggerOnHover={true}
-              colorFrom="#2f81f7"
-              colorTo="#a371f7"
+              colorFrom="var(--fifo)"
+              colorTo="var(--lru)"
+              threshold={0}
+              rootMargin="0px"
             />
           </div>
 
@@ -129,9 +138,15 @@ export default function IntroPage({ onStart }) {
               'PDF Export',
               'Theme Options',
             ].map((feat, i) => (
-              <span key={i} className="intro-pill">
+              <motion.span
+                key={i}
+                className="intro-pill"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1 + i * 0.1, duration: 0.4 }}
+              >
                 {feat}
-              </span>
+              </motion.span>
             ))}
           </motion.div>
 
@@ -142,8 +157,8 @@ export default function IntroPage({ onStart }) {
             initial={{ opacity: 0, y: 24, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.4, duration: 0.6, type: 'spring', stiffness: 200 }}
-            whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(47,129,247,0.5)' }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02, boxShadow: '0 0 0 3px rgba(37, 99, 235, 0.15), 0 8px 32px rgba(37, 99, 235, 0.2)' }}
+            whileTap={{ scale: 0.98 }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: 8 }}>
               <path d="M8 5v14l11-7L8 5z" />
@@ -162,6 +177,6 @@ export default function IntroPage({ onStart }) {
           </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

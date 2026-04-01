@@ -5,7 +5,7 @@
   will-change: transform;
   line-height: 1.35;
   font-size: 4rem;
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: 'Press Start 2P', monospace;
   text-transform: uppercase;
   visibility: hidden;
 }

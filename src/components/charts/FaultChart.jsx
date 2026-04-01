@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
 
 /**
  * Recharts area chart wrapper for fault/hit accumulation.
+ * Themed with CSS variables for dynamic light/dark support.
  *
  * @param {Array} data - Array of { step, faults, hits } objects
  * @param {Object} themeColors - { text3, border, glass, border2, text, text2 }
@@ -32,48 +33,53 @@ export default function FaultChart({ data = [], themeColors = {} }) {
               <stop offset="100%" stopColor="var(--hit)" stopOpacity={0.02} />
             </linearGradient>
           </defs>
+          <CartesianGrid
+            stroke={themeColors.border || 'var(--border)'}
+            strokeDasharray="4 4"
+            strokeOpacity={0.5}
+          />
           <XAxis
             dataKey="step"
-            tick={{ fontSize: 9, fontFamily: 'var(--font-mono)', fill: themeColors.text3 || '#6e7681' }}
-            axisLine={{ stroke: themeColors.border || '#21262d' }}
+            tick={{ fontSize: 10, fontFamily: 'var(--font-mono)', fill: themeColors.text3 || 'var(--text3)' }}
+            axisLine={{ stroke: themeColors.border || 'var(--border)' }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fontSize: 9, fontFamily: 'var(--font-mono)', fill: themeColors.text3 || '#6e7681' }}
+            tick={{ fontSize: 10, fontFamily: 'var(--font-mono)', fill: themeColors.text3 || 'var(--text3)' }}
             axisLine={false}
             tickLine={false}
           />
           <Tooltip
             contentStyle={{
-              background: themeColors.glass || 'rgba(22,27,34,0.95)',
-              border: `1px solid ${themeColors.border2 || '#30363d'}`,
-              borderRadius: 8,
-              backdropFilter: 'blur(12px)',
-              fontSize: 11,
-              fontFamily: 'var(--font-mono)',
-              color: themeColors.text || '#e6edf3',
+              background: themeColors.glass || 'var(--bg2)',
+              border: `1px solid ${themeColors.border2 || 'var(--border2)'}`,
+              borderRadius: 10,
+              boxShadow: '0 4px 12px rgba(28, 25, 23, 0.10)',
+              fontSize: 12,
+              fontFamily: 'var(--font-sans)',
+              color: themeColors.text || 'var(--text)',
             }}
-            labelStyle={{ color: themeColors.text2 || '#8b949e' }}
+            labelStyle={{ color: themeColors.text2 || 'var(--text2)', fontFamily: 'var(--font-mono)', fontSize: 10 }}
           />
           <Area
             type="monotone"
             dataKey="faults"
-            stroke="#f85149"
+            stroke="var(--fault)"
             strokeWidth={2}
             fill="url(#faultGrad)"
             name="Faults"
             dot={false}
-            activeDot={{ r: 4, fill: '#f85149' }}
+            activeDot={{ r: 4, fill: 'var(--fault)' }}
           />
           <Area
             type="monotone"
             dataKey="hits"
-            stroke="#3fb950"
+            stroke="var(--hit)"
             strokeWidth={2}
             fill="url(#hitGrad)"
             name="Hits"
             dot={false}
-            activeDot={{ r: 4, fill: '#3fb950' }}
+            activeDot={{ r: 4, fill: 'var(--hit)' }}
           />
         </AreaChart>
       </ResponsiveContainer>

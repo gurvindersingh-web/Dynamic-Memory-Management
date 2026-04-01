@@ -4,6 +4,11 @@ export default {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+  		fontFamily: {
+  			display: ['DM Serif Display', 'serif'],
+  			body: ['DM Sans', 'Inter', 'sans-serif'],
+  			mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

@@ -7,22 +7,41 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, Clock } from 'lucide-react';
 
+const containerVariants = {
+  initial: {},
+  animate: {
+    transition: { staggerChildren: 0.07 },
+  },
+};
+
+const cardVariants = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] } },
+};
+
+const pageVariants = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] } },
+  exit: { opacity: 0, y: -8, transition: { duration: 0.2 } },
+};
+
 function SimulatorCard({ simulator, onClick, index }) {
   const Icon = simulator.icon;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.08, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      variants={cardVariants}
+      whileHover={{ y: -3, transition: { duration: 0.2 } }}
       whileTap={{ scale: 0.98 }}
       className="h-full"
     >
       <Card 
-        className="flex flex-col h-full border-border/50 bg-card/60 backdrop-blur-md hover:border-[color:var(--accent-glow)] transition-colors overflow-hidden cursor-pointer group"
+        className="flex flex-col h-full border-border/50 bg-card/60 backdrop-blur-md hover:border-[color:var(--accent-glow)] transition-all duration-200 overflow-hidden cursor-pointer group hover:shadow-lg"
         onClick={onClick}
-        style={{ '--accent-glow': simulator.colorGlow }}
+        style={{ 
+          '--accent-glow': simulator.colorGlow,
+          transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
+        }}
       >
         <CardHeader className="p-5 pb-4">
           <div className="flex justify-between items-start mb-2">
@@ -85,7 +104,13 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="dashboard">
+    <motion.div
+      className="dashboard"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <motion.header
         className="dashboard-header"
         initial={{ opacity: 0, y: -20 }}
@@ -98,7 +123,12 @@ export default function Dashboard() {
         </p>
       </motion.header>
 
-      <div className="simulator-grid">
+      <motion.div
+        className="simulator-grid"
+        variants={containerVariants}
+        initial="initial"
+        animate="animate"
+      >
         {simulatorConfigs.map((sim, i) => (
           <SimulatorCard
             key={sim.id}
@@ -107,7 +137,7 @@ export default function Dashboard() {
             index={i}
           />
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

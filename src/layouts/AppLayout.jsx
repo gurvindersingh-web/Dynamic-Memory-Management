@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LayoutDashboard, BookOpen, GraduationCap } from 'lucide-react';
 import { simulatorConfigs } from '../utils/simulatorConfig';
@@ -164,7 +164,9 @@ export default function AppLayout() {
         </aside>
 
         <main className="main-content">
-          <Outlet />
+          <AnimatePresence mode="wait">
+            <Outlet />
+          </AnimatePresence>
         </main>
       </div>
 
