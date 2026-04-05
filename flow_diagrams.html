@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DMMVisualiser — Flow Diagrams</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #1a1a2e;
+      padding: 48px 60px;
+      line-height: 1.6;
+    }
+
+    .cover {
+      text-align: center;
+      padding: 80px 40px 60px;
+      margin-bottom: 40px;
+      border-bottom: 3px solid #2563eb;
+    }
+
+    .cover h1 {
+      font-size: 36px;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .cover .subtitle {
+      font-size: 18px;
+      color: #64748b;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .cover .meta {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .diagram-section {
+      page-break-inside: avoid;
+      margin-bottom: 56px;
+    }
+
+    .diagram-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 6px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .diagram-section h2 .num {
+      background: #2563eb;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .diagram-section .desc {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+      overflow: visible;
+    }
+
+    .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .toc {
+      margin-bottom: 48px;
+      padding: 28px 32px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .toc h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 12px;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .toc li {
+      padding: 6px 0;
+      font-size: 14px;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toc li .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2563eb;
+      flex-shrink: 0;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 0;
+      border-top: 2px solid #e2e8f0;
+      margin-top: 48px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    @media print {
+      body { padding: 24px 36px; }
+      .diagram-section { page-break-inside: avoid; }
+      .page-break { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover -->
+  <div class="cover">
+    <h1>MEM//VISUALIZER</h1>
+    <div class="subtitle">Dynamic Memory Management Visualiser — Flow Diagrams</div>
+    <div class="meta">Project Documentation &bull; Generated April 2026</div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ul>
+      <li><span class="dot"></span> 1. Application User Flow</li>
+      <li><span class="dot"></span> 2. Page Replacement Simulation Flow</li>
+      <li><span class="dot"></span> 3. Dynamic Partitioning Flow</li>
+      <li><span class="dot"></span> 4. Three-Panel UI Architecture</li>
+      <li><span class="dot"></span> 5. Theme System Flow</li>
+    </ul>
+  </div>
+
+  <!-- Diagram 1 -->
+  <div class="diagram-section">
+    <h2><span class="num">1</span> Application User Flow</h2>
+    <p class="desc">
+      The overall navigation and user journey through the application — from the animated intro landing page,
+      through the dashboard simulator selection grid, into configuration, step-by-step playback, and final results with PDF export.
+    </p>
+    <div class="mermaid">
+flowchart TD
+    A["🌐 User Opens App"] --> B["✨ Intro Page\n(WebGL MagicRings Background)"]
+    B -->|"Press Enter / Click Start"| C["📋 Dashboard\n(Simulator Selection Grid)"]
+    C -->|"Select Simulator"| D{Which Simulator?}
+    D --> E["📄 Page Replacement"]
+    D --> F["📑 Paging"]
+    D --> G["🧩 Segmentation"]
+    D --> H["💾 Virtual Memory"]
+    D --> I["📊 Dynamic Partitioning"]
+    D --> J["⚠️ Thrashing"]
+    E --> K["⚙️ Configure Parameters"]
+    F --> K
+    G --> K
+    H --> K
+    I --> K
+    J --> K
+    K --> L["▶ Initialize Simulation"]
+    L --> M["🎬 Step-by-Step Playback"]
+    M --> N["📊 View Live Analytics"]
+    N --> O{Simulation Complete?}
+    O -->|No| M
+    O -->|Yes| P["🎉 View Results & Comparison"]
+    P --> Q["📥 Export PDF Report"]
+    P --> R["↻ Reset & Reconfigure"]
+    R --> K
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Diagram 2 -->
+  <div class="diagram-section">
+    <h2><span class="num">2</span> Page Replacement Simulation Flow</h2>
+    <p class="desc">
+      The internal logic when a page reference is processed: checking cache hit/miss, selecting a victim page
+      for eviction based on the chosen algorithm (FIFO/LRU/Optimal), updating the TLB and page table,
+      computing the working set, and detecting thrashing conditions.
+    </p>
+    <div class="mermaid">
+flowchart TD
+    A["📥 Receive Page Reference\nfrom Reference String"] --> B{"Is Page in\nPhysical Frames?"}
+    B -->|"Yes"| C["✅ CACHE HIT"]
+    C --> C1["Update Algorithm Metadata"]
+    C1 --> C2["LRU: Update Timestamp\nFIFO: No change\nOPT: No change"]
+    C2 --> C3["Check TLB"]
+    C3 --> C4{"Page in TLB?"}
+    C4 -->|Yes| C5["TLB HIT\nIncrement TLB Hits"]
+    C4 -->|No| C6["TLB MISS\nWalk Page Table\nUpdate TLB Entry"]
+    C5 --> Z["📊 Update Stats & Charts"]
+    C6 --> Z
+    B -->|"No"| D["❌ PAGE FAULT"]
+    D --> E{"Are Frames\nAvailable?"}
+    E -->|"Yes"| F["Load Page into\nEmpty Frame"]
+    F --> G["Update Page Table\nSet Valid Bit"]
+    G --> H["Add TLB Entry"]
+    H --> Z
+    E -->|"No (All Full)"| I{"Which Algorithm?"}
+    I -->|FIFO| J["Evict Front\nof Queue"]
+    I -->|LRU| K["Evict Oldest\nTimestamp"]
+    I -->|Optimal| L["Evict Farthest\nFuture Use"]
+    J --> M["🔄 EVICTION"]
+    K --> M
+    L --> M
+    M --> N["Invalidate Evicted\nin Page Table"]
+    N --> O["Remove from TLB"]
+    O --> P["Load New Page"]
+    P --> Q["Update Page Table"]
+    Q --> R["Add TLB Entry"]
+    R --> Z
+    Z --> AA["Increment Step"]
+    AA --> AB["Update Charts"]
+    AB --> AC["Compute Working Set"]
+    AC --> AD{"WSS > Frames?"}
+    AD -->|Yes| AE["⚠️ Thrashing"]
+    AD -->|No| AF["Normal"]
+    AE --> AG["Log Event"]
+    AF --> AG
+    AG --> AH{"More Pages?"}
+    AH -->|Yes| A
+    AH -->|No| AI["🏁 Complete"]
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Diagram 3 -->
+  <div class="diagram-section">
+    <h2><span class="num">3</span> Dynamic Partitioning Flow</h2>
+    <p class="desc">
+      How the partitioning simulator handles memory allocation using four placement algorithms
+      (First Fit, Best Fit, Worst Fit, Next Fit), block splitting when a hole is larger than needed,
+      deallocation with adjacent free block coalescing, and fragmentation metric calculation.
+    </p>
+    <div class="mermaid">
+flowchart TD
+    A["📥 Process Arrives\n(size, duration)"] --> B{"Event Type?"}
+    B -->|Allocation| C{"Which Algorithm?"}
+    C -->|First Fit| D["Scan from beginning\nPick FIRST block ≥ size"]
+    C -->|Best Fit| E["Scan ALL blocks\nPick SMALLEST ≥ size"]
+    C -->|Worst Fit| F["Scan ALL blocks\nPick LARGEST ≥ size"]
+    C -->|Next Fit| G["Scan from last pointer\nPick FIRST ≥ size"]
+    D --> H{"Block Found?"}
+    E --> H
+    F --> H
+    G --> H
+    H -->|Yes| I["Allocate Process"]
+    I --> J{"Block > Process?"}
+    J -->|Yes| K["Split Block\nCreate free remainder"]
+    J -->|No| L["Exact Fit"]
+    K --> M["📊 Update Memory Map"]
+    L --> M
+    H -->|No| N["❌ Allocation Failed\nExternal Fragmentation"]
+    N --> M
+    B -->|Deallocation| O["Free Process Block"]
+    O --> P{"Adjacent Free?"}
+    P -->|Yes| Q["Coalesce Blocks"]
+    P -->|No| R["Mark as Free"]
+    Q --> M
+    R --> M
+    M --> S["Calculate Fragmentation"]
+    S --> T["Record Snapshot"]
+    T --> U{"More Events?"}
+    U -->|Yes| A
+    U -->|No| V["🏁 Complete"]
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Diagram 4 -->
+  <div class="diagram-section">
+    <h2><span class="num">4</span> Three-Panel UI Architecture</h2>
+    <p class="desc">
+      The main simulator interface is organized into three panels: the Config Panel (left) for algorithm
+      selection and playback controls, the Simulation Stage (center) for real-time memory visualization,
+      and the Stats Panel (right) for analytics, charts, and event logging.
+    </p>
+    <div class="mermaid">
+flowchart LR
+    subgraph Left["⚙️ Config Panel"]
+        direction TB
+        A1["Algorithm Selector\nFIFO / LRU / OPT"]
+        A2["Frame Count\nStepper (1-8)"]
+        A3["Reference String\nInput + Random"]
+        A4["Locality Analysis"]
+        A5["Initialize Button"]
+        A6["Playback Controls\nPlay / Pause / Step"]
+        A7["Speed Slider"]
+        A8["Reset Button"]
+    end
+
+    subgraph Center["🖥️ Simulation Stage"]
+        direction TB
+        B1["Virtual Address Space"]
+        B2["Connection Lines\nAnimated SVG"]
+        B3["Physical Frames\nAnimated Cells"]
+        B4["Page Table + TLB"]
+        B5["Working Set"]
+        B6["Locality Heatmap"]
+        B7["Reference Timeline"]
+    end
+
+    subgraph Right["📊 Stats Panel"]
+        direction TB
+        C1["Metric Cards\nFaults / Hits / Efficiency"]
+        C2["Belady Anomaly Alert"]
+        C3["Fault Chart\nArea Graph"]
+        C4["Comparison Table"]
+        C5["Radar Chart"]
+        C6["Recommendation"]
+        C7["Event Log\n+ PDF Export"]
+    end
+
+    Left --> Center --> Right
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Diagram 5 -->
+  <div class="diagram-section">
+    <h2><span class="num">5</span> Theme System Flow</h2>
+    <p class="desc">
+      The theme system supports 9 themes (6 dark + 3 light). When a user selects a theme, CSS custom properties
+      are injected into the document root. A MutationObserver detects the change and triggers Recharts to
+      re-read the computed color values for SVG rendering.
+    </p>
+    <div class="mermaid">
+flowchart TD
+    A["User Clicks Theme Icon\nin Header"] --> B["Theme Selector\nModal Opens"]
+    B --> C{"Select Theme"}
+    C --> D["🌙 Dark Themes"]
+    D --> D1["Midnight"]
+    D --> D2["Deep Ocean"]
+    D --> D3["Nebula"]
+    D --> D4["Matrix"]
+    D --> D5["Crimson"]
+    D --> D6["Ember"]
+    C --> E["☀️ Light Themes"]
+    E --> E1["Snowfall"]
+    E --> E2["Ivory"]
+    E --> E3["Lavender Mist"]
+    D1 --> F["Apply CSS Variables\nto document root"]
+    D2 --> F
+    D3 --> F
+    D4 --> F
+    D5 --> F
+    D6 --> F
+    E1 --> F
+    E2 --> F
+    E3 --> F
+    F --> G["All Components\nRe-render"]
+    G --> H["MutationObserver\nDetects Change"]
+    H --> I["Recharts Re-reads\nCSS Variables"]
+    I --> J["Charts Update\nwith New Colors"]
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    DMMVisualiser — Dynamic Memory Management Visualiser &bull; Flow Diagram Documentation &bull; April 2026
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#dbeafe',
+        primaryTextColor: '#1e293b',
+        primaryBorderColor: '#2563eb',
+        lineColor: '#64748b',
+        secondaryColor: '#f1f5f9',
+        tertiaryColor: '#f8fafc',
+        fontFamily: 'Inter, sans-serif',
+        fontSize: '13px',
+        nodeBorder: '#2563eb',
+      },
+      flowchart: {
+        curve: 'basis',
+        padding: 16,
+        htmlLabels: true,
+        useMaxWidth: true,
+      },
+    });
+  </script>
+</body>
+</html>
