@@ -19,7 +19,7 @@ Built with **React 19, Framer Motion, GSAP, Three.js, and Recharts** — this is
 
 ---
 
-## 🎥 Demo
+## 📷 Demo
 
 <img width="1919" height="951" alt="Screenshot from 2026-03-29 13-48-50" src="https://github.com/user-attachments/assets/0fc2d34a-a89a-4980-8082-11fabd06d67d" />
 
