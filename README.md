@@ -248,7 +248,7 @@ git push origin feature/your-feature
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This Project is licensed under the [MIT License](LICENSE).
 
 ---
 
