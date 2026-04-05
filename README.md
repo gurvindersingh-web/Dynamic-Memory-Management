@@ -254,7 +254,7 @@ This Project is licensed under the [MIT License](LICENSE).
 
 ## 👨‍💻 Webpage
 
-(https://dynamic-memory-management.vercel.app/)
+https://dynamic-memory-management.vercel.app/
 ---
 
 > Built with 🧠 for Operating Systems — because memory management deserves better than textbook diagrams.
