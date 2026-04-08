@@ -118,9 +118,11 @@ export default function IntroPage({ onStart }) {
             Visualise{' '}
             <a href="https://www.geeksforgeeks.org/page-replacement-algorithms-in-operating-systems/" target="_blank" rel="noopener noreferrer" className="intro-highlight intro-link">FIFO</a>,{' '}
             <a href="https://www.geeksforgeeks.org/lru-cache-implementation/" target="_blank" rel="noopener noreferrer" className="intro-highlight lru intro-link">LRU</a>, and{' '}
-            <a href="https://www.geeksforgeeks.org/optimal-page-replacement-algorithm/" target="_blank" rel="noopener noreferrer" className="intro-highlight opt intro-link">Optimal</a>{' '}
-            page replacement algorithms with stunning animations, TLB simulation, working set
-            tracking, and Belady's anomaly detection — all in one interactive tool.
+            <a href="https://www.geeksforgeeks.org/optimal-page-replacement-algorithm/" target="_blank" rel="noopener noreferrer" className="intro-highlight opt intro-link">Optimal</a>,{' '}
+            <span className="intro-highlight" style={{ color: 'var(--lfu)' }}>LFU</span>, and{' '}
+            <span className="intro-highlight" style={{ color: 'var(--clock)' }}>Clock (Second Chance)</span>{' '}
+            page replacement algorithms with stunning animations, TLB simulation, working set tracking,
+            and Belady&apos;s anomaly detection — all in one interactive tool.
           </motion.p>
 
           {/* Feature pills */}
@@ -131,7 +133,7 @@ export default function IntroPage({ onStart }) {
             transition={{ delay: 1.1, duration: 0.6 }}
           >
             {[
-              '3 Algorithms',
+              '5 Algorithms',
               'Live TLB',
               'Page Table',
               'Thrashing Detection',

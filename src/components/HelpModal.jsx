@@ -10,6 +10,8 @@ export default function HelpModal({ onClose }) {
     { key: '1', desc: 'Switch to FIFO' },
     { key: '2', desc: 'Switch to LRU' },
     { key: '3', desc: 'Switch to OPT' },
+    { key: '4', desc: 'Switch to LFU' },
+    { key: '5', desc: 'Switch to CLOCK' },
     { key: 'H / ?', desc: 'Toggle this help modal' },
   ];
 
@@ -48,7 +50,7 @@ export default function HelpModal({ onClose }) {
         <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.6 }}>
           <strong>MEM//VISUALIZER</strong> is an interactive tool for understanding
           dynamic memory management page replacement algorithms. It visualizes how
-          FIFO, LRU, and Optimal algorithms handle page faults and manage physical
+          FIFO, LRU, Optimal, LFU, and Clock (Second Chance) algorithms handle page faults and manage physical
           memory frames.
         </p>
         <br />

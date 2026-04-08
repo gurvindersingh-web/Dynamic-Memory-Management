@@ -9,7 +9,7 @@ export const simulatorConfigs = [
     color: '#2f81f7',
     colorDim: '#1f4a8a',
     colorGlow: 'rgba(47,129,247,0.5)',
-    description: 'Visualize FIFO, LRU, and Optimal page replacement algorithms with live fault tracking and performance comparison.',
+    description: 'Visualize FIFO, LRU, Optimal, LFU, and Clock (Second Chance) page replacement algorithms with live fault tracking and performance comparison.',
     features: [
       'Algorithm Comparison',
       'Live Fault Tracking',
