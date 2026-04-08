@@ -34,6 +34,22 @@ function FrameCell({ index, page, animState, algorithm, stepData, currentStep, r
         metaText = `NEXT:+${dist}`;
         agePercent = Math.min((dist / referenceString.length) * 100 * 2, 100);
       }
+    } else if (algorithm === 'LFU') {
+      const c = stepData.counts?.get(page);
+      const lu = stepData.lastUsed?.get(page);
+      if (c !== undefined) {
+        metaText = `COUNT:${c}`;
+        // Higher count = "newer"/hotter → smaller bar
+        agePercent = Math.max(0, 100 - Math.min(c * 18, 100));
+      } else if (lu !== undefined) {
+        metaText = `LAST:${lu}`;
+      }
+    } else if (algorithm === 'CLOCK') {
+      const rb = stepData.refBits || [];
+      const r = rb[index] ?? 0;
+      const h = stepData.hand;
+      metaText = `R:${r}${h === index ? ' ⟲' : ''}`;
+      agePercent = r ? 30 : 80;
     }
   }
 

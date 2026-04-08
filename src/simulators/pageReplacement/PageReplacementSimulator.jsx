@@ -47,6 +47,12 @@ export default function PageReplacementSimulator() {
         case '3':
           s.setAlgorithm('OPT');
           break;
+        case '4':
+          s.setAlgorithm('LFU');
+          break;
+        case '5':
+          s.setAlgorithm('CLOCK');
+          break;
         default:
           break;
       }

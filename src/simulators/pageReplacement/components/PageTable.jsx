@@ -21,7 +21,13 @@ export default function PageTable({
                 <th>VPN</th>
                 <th>Frame</th>
                 <th>Valid</th>
-                <th>{algorithm === 'FIFO' ? 'Queue' : algorithm === 'LRU' ? 'Time' : 'Next'}</th>
+                <th>{
+                  algorithm === 'FIFO' ? 'Queue'
+                  : algorithm === 'LRU' ? 'Time'
+                  : algorithm === 'OPT' ? 'Next'
+                  : algorithm === 'LFU' ? 'Count'
+                  : 'Ref'
+                }</th>
               </tr>
             </thead>
             <tbody>

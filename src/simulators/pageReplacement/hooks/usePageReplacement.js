@@ -135,6 +135,8 @@ export function usePageReplacement() {
       case 'FIFO': return 'var(--fifo)';
       case 'LRU': return 'var(--lru)';
       case 'OPT': return 'var(--opt)';
+      case 'LFU': return 'var(--lfu)';
+      case 'CLOCK': return 'var(--clock)';
       default: return 'var(--fifo)';
     }
   }, [algorithm]);
@@ -164,17 +166,19 @@ export function usePageReplacement() {
       { name: 'FIFO', ...allResults.FIFO },
       { name: 'LRU', ...allResults.LRU },
       { name: 'OPT', ...allResults.OPT },
+      { name: 'LFU', ...allResults.LFU },
+      { name: 'CLOCK', ...allResults.CLOCK },
     ];
     const best = results.reduce((a, b) => (a.hitRate > b.hitRate ? a : b));
     const localityLevel = locality.temporalLocality;
 
     let suggestion = '';
     if (localityLevel === 'HIGH') {
-      suggestion = `High temporal locality detected — LRU is optimal for this pattern. `;
+      suggestion = `High temporal locality detected — LRU/CLOCK usually perform well for this pattern. `;
     } else if (localityLevel === 'LOW') {
       suggestion = `Low locality — access pattern is scattered. All algorithms perform similarly. `;
     } else {
-      suggestion = `Moderate locality — LRU has a slight edge over FIFO. `;
+      suggestion = `Moderate locality — LRU/CLOCK tend to beat FIFO. `;
     }
 
     if (uniquePages > frameCount * 2) {
@@ -188,6 +192,8 @@ export function usePageReplacement() {
         FIFO: allResults.FIFO.hitRate,
         LRU: allResults.LRU.hitRate,
         OPT: allResults.OPT.hitRate,
+        LFU: allResults.LFU.hitRate,
+        CLOCK: allResults.CLOCK.hitRate,
       },
     };
   }, [allResults, currentStep, referenceString.length, locality, uniquePages, frameCount]);
@@ -214,6 +220,14 @@ export function usePageReplacement() {
         } else if (algorithm === 'OPT') {
           const nextUseIdx = referenceString.indexOf(vpn, currentStep);
           meta = nextUseIdx === -1 ? '∞' : `+${nextUseIdx - currentStep + 1}`;
+        } else if (algorithm === 'LFU') {
+          const c = currentStepData.counts?.get(vpn);
+          const lu = currentStepData.lastUsed?.get(vpn);
+          meta = c !== undefined ? `c=${c}${lu !== undefined ? `,t=${lu}` : ''}` : '—';
+        } else if (algorithm === 'CLOCK') {
+          const refBits = currentStepData.refBits || [];
+          const h = currentStepData.hand;
+          meta = frameIdx !== -1 ? `R=${refBits[frameIdx] ?? 0}${h === frameIdx ? ' ⟲' : ''}` : '—';
         }
       }
 

@@ -15,7 +15,6 @@
 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
@@ -67,6 +66,14 @@
   --opt: #39c5cf;
   --opt-dim: #1a5a5f;
   --opt-glow: rgba(57, 197, 207, 0.4);
+
+  --lfu: #f778ba;
+  --lfu-dim: #5a1f3f;
+  --lfu-glow: rgba(247, 120, 186, 0.35);
+
+  --clock: #7ee787;
+  --clock-dim: #1f5a2a;
+  --clock-glow: rgba(126, 231, 135, 0.35);
 
   --hit: #3fb950;
   --hit-dim: #1a4a22;

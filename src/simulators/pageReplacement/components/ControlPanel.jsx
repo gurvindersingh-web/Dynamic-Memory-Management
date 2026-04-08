@@ -26,6 +26,22 @@ const ALGO_DATA = {
     color: 'var(--opt)',
     tooltip: `OPT evicts the page that won't be needed for the longest time in the future. Requires future knowledge.\n\nLookahead:\n  For each frame, find next use\n  Evict page with max(next_use)\n\nUsed as benchmark — impossible to implement in practice.`,
   },
+  LFU: {
+    name: 'LFU',
+    desc: 'Least Frequently Used',
+    hint: 'Best for: Stable hot set',
+    perfWidth: '55%',
+    color: 'var(--lfu)',
+    tooltip: `LFU evicts the page with the lowest access count.\n\nState:\n  count[page]++ on each access\n  Evict min(count)\n  Tie-break: oldest last-used\n\nCan keep pages that were popular long ago if counts are not aged.`,
+  },
+  CLOCK: {
+    name: 'CLOCK',
+    desc: 'Second Chance',
+    hint: 'Best for: Fast LRU-ish',
+    perfWidth: '60%',
+    color: 'var(--clock)',
+    tooltip: `CLOCK approximates LRU with a reference bit per frame.\n\nOn access:\n  refBit = 1\nOn fault:\n  advance hand\n  if refBit==1 → clear & skip\n  if refBit==0 → evict\n\nPractical, efficient, and widely used.`,
+  },
 };
 
 function AlgorithmCard({ algo, active, onClick }) {
@@ -102,7 +118,7 @@ export default function ControlPanel({
       {/* Algorithm Selection */}
       <div className="panel-section">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {['FIFO', 'LRU', 'OPT'].map((algo) => (
+          {['FIFO', 'LRU', 'OPT', 'LFU', 'CLOCK'].map((algo) => (
             <AlgorithmCard key={algo} algo={algo} active={algorithm === algo} onClick={() => onAlgorithmChange(algo)} />
           ))}
         </div>

@@ -86,11 +86,11 @@ function AlgoRadarChart({ allResults, themeColors }) {
   if (!allResults) return null;
   const totalSteps = allResults.FIFO.steps.length || 1;
   const data = [
-    { metric: 'Hit Rate', FIFO: allResults.FIFO.hitRate * 100, LRU: allResults.LRU.hitRate * 100, OPT: allResults.OPT.hitRate * 100 },
-    { metric: 'Low Faults', FIFO: (1 - allResults.FIFO.faults / totalSteps) * 100, LRU: (1 - allResults.LRU.faults / totalSteps) * 100, OPT: (1 - allResults.OPT.faults / totalSteps) * 100 },
-    { metric: 'Efficiency', FIFO: (allResults.FIFO.hitRate / Math.max(allResults.OPT.hitRate, 0.01)) * 100, LRU: (allResults.LRU.hitRate / Math.max(allResults.OPT.hitRate, 0.01)) * 100, OPT: 100 },
-    { metric: 'Predictability', FIFO: 90, LRU: 70, OPT: 40 },
-    { metric: 'Simplicity', FIFO: 95, LRU: 60, OPT: 20 },
+    { metric: 'Hit Rate', FIFO: allResults.FIFO.hitRate * 100, LRU: allResults.LRU.hitRate * 100, OPT: allResults.OPT.hitRate * 100, LFU: allResults.LFU.hitRate * 100, CLOCK: allResults.CLOCK.hitRate * 100 },
+    { metric: 'Low Faults', FIFO: (1 - allResults.FIFO.faults / totalSteps) * 100, LRU: (1 - allResults.LRU.faults / totalSteps) * 100, OPT: (1 - allResults.OPT.faults / totalSteps) * 100, LFU: (1 - allResults.LFU.faults / totalSteps) * 100, CLOCK: (1 - allResults.CLOCK.faults / totalSteps) * 100 },
+    { metric: 'Efficiency', FIFO: (allResults.FIFO.hitRate / Math.max(allResults.OPT.hitRate, 0.01)) * 100, LRU: (allResults.LRU.hitRate / Math.max(allResults.OPT.hitRate, 0.01)) * 100, OPT: 100, LFU: (allResults.LFU.hitRate / Math.max(allResults.OPT.hitRate, 0.01)) * 100, CLOCK: (allResults.CLOCK.hitRate / Math.max(allResults.OPT.hitRate, 0.01)) * 100 },
+    { metric: 'Predictability', FIFO: 90, LRU: 70, OPT: 40, LFU: 65, CLOCK: 80 },
+    { metric: 'Simplicity', FIFO: 95, LRU: 60, OPT: 20, LFU: 55, CLOCK: 85 },
   ];
 
   return (
@@ -103,6 +103,8 @@ function AlgoRadarChart({ allResults, themeColors }) {
           <Radar name="FIFO" dataKey="FIFO" stroke="#2f81f7" fill="#2f81f7" fillOpacity={0.1} strokeWidth={2} />
           <Radar name="LRU" dataKey="LRU" stroke="#a371f7" fill="#a371f7" fillOpacity={0.1} strokeWidth={2} />
           <Radar name="OPT" dataKey="OPT" stroke="#39c5cf" fill="#39c5cf" fillOpacity={0.1} strokeWidth={2} />
+          <Radar name="LFU" dataKey="LFU" stroke="var(--lfu)" fill="var(--lfu)" fillOpacity={0.08} strokeWidth={2} />
+          <Radar name="CLOCK" dataKey="CLOCK" stroke="var(--clock)" fill="var(--clock)" fillOpacity={0.08} strokeWidth={2} />
           <Legend wrapperStyle={{ fontSize: 10, fontFamily: 'var(--font-mono)' }} />
         </RadarChart>
       </ResponsiveContainer>
@@ -116,6 +118,8 @@ function ComparisonTable({ allResults }) {
     { name: 'FIFO', color: 'var(--fifo)', data: allResults.FIFO },
     { name: 'LRU', color: 'var(--lru)', data: allResults.LRU },
     { name: 'OPT', color: 'var(--opt)', data: allResults.OPT },
+    { name: 'LFU', color: 'var(--lfu)', data: allResults.LFU },
+    { name: 'CLOCK', color: 'var(--clock)', data: allResults.CLOCK },
   ];
   const bestFaults = Math.min(...algos.map((a) => a.data.faults));
 

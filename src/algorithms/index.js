@@ -1,14 +1,18 @@
 import { runFifo } from './fifo';
 import { runLru } from './lru';
 import { runOptimal } from './optimal';
+import { runLfu } from './lfu';
+import { runClock } from './clock';
 
-export { runFifo, runLru, runOptimal };
+export { runFifo, runLru, runOptimal, runLfu, runClock };
 
 export function computeAllAlgorithms(referenceString, frameCount) {
   return {
     FIFO: runFifo(referenceString, frameCount),
     LRU: runLru(referenceString, frameCount),
     OPT: runOptimal(referenceString, frameCount),
+    LFU: runLfu(referenceString, frameCount),
+    CLOCK: runClock(referenceString, frameCount),
   };
 }
 
