@@ -87,19 +87,78 @@ export default function MagicRings({
   clickBurst = false,
 }) {
   const mountRef = useRef(null);
-  const propsRef = useRef(null);
+  const propsRef = useRef({
+    color,
+    colorTwo,
+    speed,
+    ringCount,
+    attenuation,
+    lineThickness,
+    baseRadius,
+    radiusStep,
+    scaleRate,
+    opacity,
+    noiseAmount,
+    rotation,
+    ringGap,
+    fadeIn,
+    fadeOut,
+    followMouse,
+    mouseInfluence,
+    hoverScale,
+    parallax,
+    clickBurst,
+  });
   const mouseRef = useRef([0, 0]);
   const smoothMouseRef = useRef([0, 0]);
   const hoverAmountRef = useRef(0);
   const isHoveredRef = useRef(false);
   const burstRef = useRef(0);
-
-  propsRef.current = {
-    color, colorTwo, speed, ringCount, attenuation, lineThickness,
-    baseRadius, radiusStep, scaleRate, opacity, noiseAmount,
-    rotation, ringGap, fadeIn, fadeOut, followMouse, mouseInfluence,
-    hoverScale, parallax, clickBurst,
-  };
+  useEffect(() => {
+    propsRef.current = {
+      color,
+      colorTwo,
+      speed,
+      ringCount,
+      attenuation,
+      lineThickness,
+      baseRadius,
+      radiusStep,
+      scaleRate,
+      opacity,
+      noiseAmount,
+      rotation,
+      ringGap,
+      fadeIn,
+      fadeOut,
+      followMouse,
+      mouseInfluence,
+      hoverScale,
+      parallax,
+      clickBurst,
+    };
+  }, [
+    color,
+    colorTwo,
+    speed,
+    ringCount,
+    attenuation,
+    lineThickness,
+    baseRadius,
+    radiusStep,
+    scaleRate,
+    opacity,
+    noiseAmount,
+    rotation,
+    ringGap,
+    fadeIn,
+    fadeOut,
+    followMouse,
+    mouseInfluence,
+    hoverScale,
+    parallax,
+    clickBurst,
+  ]);
 
   useEffect(() => {
     const mount = mountRef.current;

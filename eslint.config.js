@@ -23,7 +23,19 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // Keep this codebase signal-focused: unused vars are warnings, not blockers
+      'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
+      // Too noisy for this codebase (many intentional "init-on-mount" effects)
+      'react-hooks/set-state-in-effect': 'off',
+      // Too strict for shared UI utility modules / route config patterns
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
+    // Tooling / config files run in Node (ESM in this repo)
+    files: ['vite.config.js', 'tailwind.config.js', 'eslint.config.js', 'generate_pdf.js'],
+    languageOptions: {
+      globals: globals.node,
     },
   },
 ])

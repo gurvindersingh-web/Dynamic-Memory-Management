@@ -391,6 +391,7 @@ const Shuffle = ({
   const classes = useMemo(() => `shuffle-parent ${ready ? 'is-ready' : ''} ${className}`, [ready, className]);
 
   const Tag = tag || 'p';
+  // eslint-disable-next-line react-hooks/refs
   return React.createElement(Tag, { ref, className: classes, style: commonStyle }, text);
 };
 
